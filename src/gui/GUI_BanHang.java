@@ -5,12 +5,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.TextArea;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -23,6 +25,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JTabbedPane;
 
 
 public class GUI_BanHang extends JFrame {
@@ -31,9 +40,11 @@ public class GUI_BanHang extends JFrame {
 	private JPanel contentPane;
 	private DefaultTableModel tableModelKH;
 	private Component tableKH;
-	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextArea TextArea;
+	private JTextField textField_3;
+	private JTextField textField_4;
 
 	/**
 	 * Launch the application.
@@ -56,32 +67,26 @@ public class GUI_BanHang extends JFrame {
 	 */
 	public GUI_BanHang() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(1800, 1000));
+		setSize(new Dimension(1800, 850));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(null);
-		add(contentPane);		
-		JLabel lbTitle = new JLabel("QUẢN LÝ BÁN HÀNG");
-		lbTitle.setForeground(new Color(64, 128, 128));
-		lbTitle.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lbTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lbTitle.setBounds(0, 0, 1540, 60);
-		contentPane.add(lbTitle);
+		setContentPane(contentPane);
 		
 		JPanel p_ThongTinGioHang = new JPanel();
 		p_ThongTinGioHang.setBorder(new TitledBorder(
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Thông tin giỏ hàng", TitledBorder.LEFT, TitledBorder.TOP, null,
 				new Color(64, 128, 128)));
-		p_ThongTinGioHang.setBounds(0, 70, 1000, 750);
+		p_ThongTinGioHang.setBounds(0, 70, 1000, 700);
 		contentPane.add(p_ThongTinGioHang);
 		p_ThongTinGioHang.setLayout(null);
 		
 		JScrollPane scrPaneKH = new JScrollPane();
-		scrPaneKH.setBounds(6, 15, 985, 725);
+		scrPaneKH.setBounds(6, 15, 985, 675);
 		p_ThongTinGioHang.add(scrPaneKH);
 
-		tableModelKH = new DefaultTableModel(new String[] {"Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá bán", "Thuế"},0);
+		tableModelKH = new DefaultTableModel(new String[] {"STT","Mã sản phẩm", "Tên sản phẩm", "Số lượng", "Giá bán", "Thuế", "Thành tiền", ""},0);
 		tableKH = new JTable(tableModelKH);
 		((JTable) tableKH).setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableKH.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
@@ -94,14 +99,14 @@ public class GUI_BanHang extends JFrame {
 				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
 				"Thông tin sản phẩm", TitledBorder.CENTER, TitledBorder.TOP, null,
 				new Color(64, 128, 128)));
-		p_ThongTinSanPham.setBounds(1005, 70, 535, 750);
+		p_ThongTinSanPham.setBounds(1005, 25, 535, 750);
 		contentPane.add(p_ThongTinSanPham);
 		p_ThongTinSanPham.setLayout(null);
 		
 		
 		JPanel p_NhapSanPham = new JPanel();
-		p_NhapSanPham.setBorder(null);
-		p_NhapSanPham.setBounds(5, 15, 520, 150);
+		p_NhapSanPham.setBorder(new LineBorder(new Color(0, 0, 0)));
+		p_NhapSanPham.setBounds(5, 15, 520, 130);
 		p_ThongTinSanPham.add(p_NhapSanPham);
 		p_NhapSanPham.setLayout(null);
 		
@@ -110,18 +115,18 @@ public class GUI_BanHang extends JFrame {
 		lb_MaSanPham.setBounds(10, 0, 200, 25);
 		p_NhapSanPham.add(lb_MaSanPham);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 25, 500, 70);
-		p_NhapSanPham.add(textField);
-		textField.setColumns(10);
+		TextArea = new JTextArea();
+		TextArea.setBounds(10, 25, 500, 40);
+		p_NhapSanPham.add(TextArea);
+		TextArea.setColumns(10);
 		
 		JLabel lblNhpSLng = new JLabel("Nhập số lượng: ");
 		lblNhpSLng.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNhpSLng.setBounds(10, 105, 130, 25);
+		lblNhpSLng.setBounds(10, 77, 130, 25);
 		p_NhapSanPham.add(lblNhpSLng);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(150, 105, 100, 30);
+		textField_1.setBounds(150, 77, 100, 30);
 		p_NhapSanPham.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -132,14 +137,15 @@ public class GUI_BanHang extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(270, 100, 240, 45);
+		btnNewButton.setBounds(270, 72, 240, 45);
 		p_NhapSanPham.add(btnNewButton);
 		
 		JPanel p_ThanhToan = new JPanel();
-		p_ThanhToan.setBorder(null);
-		p_ThanhToan.setBounds(5, 170, 520, 450);
-		p_ThongTinSanPham.add(p_ThanhToan);
+		p_ThanhToan.setBorder(new LineBorder(new Color(0, 0, 0)));
+		p_ThanhToan.setBounds(5, 220, 520, 425);
+//		p_ThongTinSanPham.add(p_ThanhToan);
 		p_ThanhToan.setLayout(null);
+//		p_ThanhToan.setPreferredSize( new Dimension(520, 425));
 		
 		JLabel lblNewLabel = new JLabel("Thanh toán trực tiếp: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 24));
@@ -174,13 +180,15 @@ public class GUI_BanHang extends JFrame {
 		p_ThanhToan.add(lblNewLabel_1_2_1);
 		
 		textField_2 = new JTextField();
+//		textField_2.setText("aaaaaaaaaaaaaaaa");
+//		textField_2.disable();
 		textField_2.setColumns(10);
 		textField_2.setBounds(270, 110, 240, 30);
 		p_ThanhToan.add(textField_2);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Click c\u00E1c n\u00FAt \u0111\u1EC3 th\u00EAm gi\u00E1 tr\u1ECB v\u00E0o \u00F4 ti\u1EC1n nh\u1EADn", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 153, 255)));
-		panel.setBounds(10, 150, 500, 130);
+		panel.setBounds(10, 150, 500, 94);
 		p_ThanhToan.add(panel);
 		panel.setLayout(null);
 		
@@ -218,40 +226,21 @@ public class GUI_BanHang extends JFrame {
 		btnNewButton_1_3.setBounds(10, 55, 140, 30);
 		panel.add(btnNewButton_1_3);
 		
-		JButton btnNewButton_1_1_2 = new JButton("500.000");
-		btnNewButton_1_1_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1_1_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1_1_2.setBounds(350, 90, 140, 30);
-		panel.add(btnNewButton_1_1_2);
-		
-		JButton btnNewButton_1_2_2 = new JButton("200.000");
-		btnNewButton_1_2_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1_2_2.setBounds(180, 90, 140, 30);
-		panel.add(btnNewButton_1_2_2);
-		
-		JButton btnNewButton_1_4 = new JButton("100.000");
-		btnNewButton_1_4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton_1_4.setBounds(10, 90, 140, 30);
-		panel.add(btnNewButton_1_4);
-		
 		JLabel lblNewLabel_1_2_1_1 = new JLabel("Tiền thối: ");
 		lblNewLabel_1_2_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1_2_1_1.setBounds(10, 286, 100, 25);
+		lblNewLabel_1_2_1_1.setBounds(10, 254, 100, 25);
 		p_ThanhToan.add(lblNewLabel_1_2_1_1);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("0 VNĐ");
 		lblNewLabel_1_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1_1_1_1.setBounds(360, 286, 150, 25);
+		lblNewLabel_1_1_1_1.setBounds(360, 254, 150, 25);
 		p_ThanhToan.add(lblNewLabel_1_1_1_1);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(160, 160, 160), new Color(160, 160, 160)), "S\u1ED1 t\u1EDD \u1EE9ng v\u1EDBi m\u1EC7nh gi\u00E1", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 153, 255)));
-		panel_1.setBounds(10, 321, 500, 130);
+		panel_1.setBounds(10, 289, 500, 130);
 		p_ThanhToan.add(panel_1);
 		
 		JButton btnNewButton_1_5 = new JButton("1.000 (0)");
@@ -303,12 +292,90 @@ public class GUI_BanHang extends JFrame {
 		btnNewButton_2.setForeground(new Color(0, 0, 255));
 		btnNewButton_2.setBackground(new Color(0, 51, 153));
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_2.setBounds(15, 630, 500, 40);
+		btnNewButton_2.setBounds(15, 660, 500, 40);
 		p_ThongTinSanPham.add(btnNewButton_2);
 		
 		JButton btnNewButton_2_1 = new JButton("Lưu tạm");
 		btnNewButton_2_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_2_1.setBounds(15, 678, 500, 30);
+		btnNewButton_2_1.setBounds(15, 710, 500, 30);
 		p_ThongTinSanPham.add(btnNewButton_2_1);
+		
+		JLabel lb_PTTT = new JLabel("Chọn phương thức thanh toán");
+		lb_PTTT.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lb_PTTT.setBounds(5, 150, 350, 30);
+		p_ThongTinSanPham.add(lb_PTTT);
+		
+		JPanel p_ThanhToanTTuyen = new JPanel();
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setSelectedIndex(-1);
+		tabbedPane.setBounds(5, 185, 520, 450);
+		p_ThongTinSanPham.add(tabbedPane);
+		
+		tabbedPane.addTab("Thanh toán trực tiếp", p_ThanhToan);
+		tabbedPane.addTab("Thanh toán toán gián tiếp", p_ThanhToanTTuyen);
+		
+		
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_2.setBounds(5, 5, 535, 65);
+		contentPane.add(panel_2);
+		panel_2.setLayout(null);
+		
+		JLabel lb_tenKhachHang = new JLabel("Tên khách hàng:");
+		lb_tenKhachHang.setBounds(5, 10, 120, 20);
+		lb_tenKhachHang.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_2.add(lb_tenKhachHang);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(135, 10, 390, 20);
+		panel_2.add(textField_3);
+		textField_3.setColumns(10);
+		
+		JLabel lb_soDienThoaiKH = new JLabel("Số điện thoại: ");
+		lb_soDienThoaiKH.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lb_soDienThoaiKH.setBounds(5, 35, 120, 20);
+		panel_2.add(lb_soDienThoaiKH);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(135, 35, 390, 20);
+		panel_2.add(textField_4);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.setBounds(545, 5, 450, 65);
+		contentPane.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lb_tenKhachHang_1 = new JLabel("Mã hóa đơn: ");
+		lb_tenKhachHang_1.setBounds(5, 10, 200, 20);
+		lb_tenKhachHang_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_3.add(lb_tenKhachHang_1);
+		
+		JLabel lb_tenKhachHang_1_1 = new JLabel("XXXX-XXXX-XXXX");
+		lb_tenKhachHang_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb_tenKhachHang_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lb_tenKhachHang_1_1.setBounds(240, 10, 200, 20);
+		panel_3.add(lb_tenKhachHang_1_1);
+		
+		JLabel lb_tenKhachHang_1_2 = new JLabel("Ngày lập hóa đơn:");
+		lb_tenKhachHang_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lb_tenKhachHang_1_2.setBounds(5, 40, 200, 20);
+		panel_3.add(lb_tenKhachHang_1_2);
+		
+		JLabel lb_tenKhachHang_1_1_1 = new JLabel("DD/MM/YYYY");
+		lb_tenKhachHang_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb_tenKhachHang_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lb_tenKhachHang_1_1_1.setBounds(240, 40, 200, 20);
+		panel_3.add(lb_tenKhachHang_1_1_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Nguyen Van A -XXXXXXXX");
+		lblNewLabel_2.setForeground(Color.BLUE);
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel_2.setBounds(1275, 5, 250, 20);
+		contentPane.add(lblNewLabel_2);
 	}
 }
