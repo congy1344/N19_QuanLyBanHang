@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import connect.ConnectDB;
+import connectDB.ConnectDB;
 import entity.KhachHang;
 
 //import connect.ConnectDB;
