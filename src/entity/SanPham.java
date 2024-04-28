@@ -1,20 +1,21 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class SanPham {
 
 	private String maSP;
 	private String tenSP;
-	private boolean ngaySX;
-	private boolean HSD;
+	private LocalDate ngaySX;
+	private LocalDate HSD;
 	private double giaNhap;
 	private double giaBan;
 	private double thue;
 	private LoaiHang loaiHang;
 	
 
-	public SanPham(String maSP, String tenSP, boolean ngaySX, boolean hSD, double giaNhap, double giaBan, double thue,
+	public SanPham(String maSP, String tenSP, LocalDate ngaySX, LocalDate hSD, double giaNhap, double giaBan, double thue,
 			LoaiHang loaiHang) {
 		this.maSP = maSP;
 		this.tenSP = tenSP;
@@ -47,22 +48,22 @@ public class SanPham {
 	}
 
 
-	public boolean isNgaySX() {
+	public LocalDate getNgaySX() {
 		return ngaySX;
 	}
 
 
-	public void setNgaySX(boolean ngaySX) {
+	public void setNgaySX(LocalDate ngaySX) {
 		this.ngaySX = ngaySX;
 	}
 
 
-	public boolean isHSD() {
+	public LocalDate getHSD() {
 		return HSD;
 	}
 
 
-	public void setHSD(boolean hSD) {
+	public void setHSD(LocalDate hSD) {
 		HSD = hSD;
 	}
 

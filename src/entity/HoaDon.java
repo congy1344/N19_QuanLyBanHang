@@ -1,17 +1,18 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class HoaDon {
 
 	private NhanVien nhanVien;
 	private String maHD;
-	private boolean ngayLapHoaDon;
+	private LocalDate ngayLapHoaDon;
 	private PTThanhToan ptThanhToan;
 	private double tienKhachDua;
 	
 	
-	public HoaDon(NhanVien nhanVien, String maHD, boolean ngayLapHoaDon, PTThanhToan ptThanhToan, double tienKhachDua) {
+	public HoaDon(NhanVien nhanVien, String maHD, LocalDate ngayLapHoaDon, PTThanhToan ptThanhToan, double tienKhachDua) {
 		this.nhanVien = nhanVien;
 		this.maHD = maHD;
 		this.ngayLapHoaDon = ngayLapHoaDon;
@@ -40,12 +41,12 @@ public class HoaDon {
 	}
 
 
-	public boolean isNgayLapHoaDon() {
+	public LocalDate isNgayLapHoaDon() {
 		return ngayLapHoaDon;
 	}
 
 
-	public void setNgayLapHoaDon(boolean ngayLapHoaDon) {
+	public void setNgayLapHoaDon(LocalDate ngayLapHoaDon) {
 		this.ngayLapHoaDon = ngayLapHoaDon;
 	}
 
