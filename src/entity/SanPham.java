@@ -8,23 +8,27 @@ public class SanPham {
 	private String maSP;
 	private String tenSP;
 	private LocalDate ngaySX;
-	private LocalDate HSD;
+	private LocalDate hSD;
 	private double giaNhap;
 	private double giaBan;
 	private double thue;
 	private LoaiHang loaiHang;
+	private DonViTinh donViTinh;
+	private int soLuongTonKho;
 	
 
-	public SanPham(String maSP, String tenSP, LocalDate ngaySX, LocalDate hSD, double giaNhap, double giaBan, double thue,
-			LoaiHang loaiHang) {
+	public SanPham(String maSP, String tenSP, LocalDate ngaySX, LocalDate hSD, double giaNhap, double giaBan,
+			double thue, LoaiHang loaiHang, DonViTinh donViTinh, int soLuongTonKho) {
 		this.maSP = maSP;
 		this.tenSP = tenSP;
 		this.ngaySX = ngaySX;
-		HSD = hSD;
+		this.hSD = hSD;
 		this.giaNhap = giaNhap;
 		this.giaBan = giaBan;
 		this.thue = thue;
 		this.loaiHang = loaiHang;
+		this.donViTinh = donViTinh;
+		this.soLuongTonKho = soLuongTonKho;
 	}
 
 
@@ -58,13 +62,13 @@ public class SanPham {
 	}
 
 
-	public LocalDate getHSD() {
-		return HSD;
+	public LocalDate gethSD() {
+		return hSD;
 	}
 
 
-	public void setHSD(LocalDate hSD) {
-		HSD = hSD;
+	public void sethSD(LocalDate hSD) {
+		this.hSD = hSD;
 	}
 
 
@@ -108,19 +112,32 @@ public class SanPham {
 	}
 
 
+	public DonViTinh getDonViTinh() {
+		return donViTinh;
+	}
+
+
+	public void setDonViTinh(DonViTinh donViTinh) {
+		this.donViTinh = donViTinh;
+	}
+
+
+	public int getSoLuongTonKho() {
+		return soLuongTonKho;
+	}
+
+
+	public void setSoLuongTonKho(int soLuongTonKho) {
+		this.soLuongTonKho = soLuongTonKho;
+	}
+
+
 	public double dinhGiaBan() {
 		// TODO - implement SanPham.dinhGiaBan
 		throw new UnsupportedOperationException();
 	}
 
-
-	@Override
-	public String toString() {
-		return "SanPham [maSP=" + maSP + ", tenSP=" + tenSP + ", ngaySX=" + ngaySX + ", HSD=" + HSD + ", giaNhap="
-				+ giaNhap + ", giaBan=" + giaBan + ", thue=" + thue + ", loaiHang=" + loaiHang + "]";
-	}
-
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,7 +158,12 @@ public class SanPham {
 		SanPham other = (SanPham) obj;
 		return Objects.equals(maSP, other.maSP);
 	}
-	
-	
 
+
+	@Override
+	public String toString() {
+		return "SanPham [maSP=" + maSP + ", tenSP=" + tenSP + ", ngaySX=" + ngaySX + ", hSD=" + hSD + ", giaNhap="
+				+ giaNhap + ", giaBan=" + giaBan + ", thue=" + thue + ", loaiHang=" + loaiHang + ", donViTinh="
+				+ donViTinh + ", soLuongTonKho=" + soLuongTonKho + "]";
+	}
 }
