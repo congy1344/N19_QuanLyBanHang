@@ -13,15 +13,23 @@ public class ConnectDB {
 	}
 	
 	public void connect() {
-		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH";
-		String username = "sa";
-		String password = "Kkkkkkk@6";
-		try {
-			con = DriverManager.getConnection(url, username, password);
-			System.out.println("OK");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH";
+//		String username = "sa";
+//		String password = "Kkkkkkk@6";
+//		try {
+//			con = DriverManager.getConnection(url, username, password);
+//			System.out.println("OK");
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		Đăng nhập sql bằng quyền window
+		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH;integratedSecurity=true;";
+        try {
+            con = DriverManager.getConnection(url);
+            System.out.println("OK");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 	
 	public void disconnect() {
