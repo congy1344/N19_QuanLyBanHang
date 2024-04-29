@@ -1,77 +1,43 @@
 package gui;
 
-
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JTabbedPane;
 
-
-public class GUI_BanHang extends JFrame {
+public class GUI_BanHang extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
-	private DefaultTableModel tableModelKH;
-	private Component tableKH;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextArea TextArea;
-	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField_3;
+	private Component textField_2;
+	private Component textField_1;
+	private JTextArea TextArea;
+	private DefaultTableModel tableModelKH;
+	private JTable tableKH;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI_BanHang frame = new GUI_BanHang();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Create the panel.
 	 */
 	public GUI_BanHang() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(1800, 850));
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-		setContentPane(contentPane);
+		setLayout(null);
 		
 		JPanel p_ThongTinGioHang = new JPanel();
 		p_ThongTinGioHang.setBorder(new TitledBorder(
@@ -79,7 +45,7 @@ public class GUI_BanHang extends JFrame {
 				"Thông tin giỏ hàng", TitledBorder.LEFT, TitledBorder.TOP, null,
 				new Color(64, 128, 128)));
 		p_ThongTinGioHang.setBounds(0, 70, 1000, 700);
-		contentPane.add(p_ThongTinGioHang);
+		add(p_ThongTinGioHang);
 		p_ThongTinGioHang.setLayout(null);
 		
 		JScrollPane scrPaneKH = new JScrollPane();
@@ -100,7 +66,7 @@ public class GUI_BanHang extends JFrame {
 				"Thông tin sản phẩm", TitledBorder.CENTER, TitledBorder.TOP, null,
 				new Color(64, 128, 128)));
 		p_ThongTinSanPham.setBounds(1005, 25, 535, 750);
-		contentPane.add(p_ThongTinSanPham);
+		add(p_ThongTinSanPham);
 		p_ThongTinSanPham.setLayout(null);
 		
 		
@@ -128,7 +94,6 @@ public class GUI_BanHang extends JFrame {
 		textField_1 = new JTextField();
 		textField_1.setBounds(150, 77, 100, 30);
 		p_NhapSanPham.add(textField_1);
-		textField_1.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Thêm sản phẩm");
 		btnNewButton.setBackground(new Color(204, 51, 51));
@@ -182,7 +147,6 @@ public class GUI_BanHang extends JFrame {
 		textField_2 = new JTextField();
 //		textField_2.setText("aaaaaaaaaaaaaaaa");
 //		textField_2.disable();
-		textField_2.setColumns(10);
 		textField_2.setBounds(270, 110, 240, 30);
 		p_ThanhToan.add(textField_2);
 		
@@ -320,7 +284,7 @@ public class GUI_BanHang extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_2.setBounds(5, 5, 535, 65);
-		contentPane.add(panel_2);
+		add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lb_tenKhachHang = new JLabel("Tên khách hàng:");
@@ -346,7 +310,7 @@ public class GUI_BanHang extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel_3.setBounds(545, 5, 450, 65);
-		contentPane.add(panel_3);
+		add(panel_3);
 		panel_3.setLayout(null);
 		
 		JLabel lb_tenKhachHang_1 = new JLabel("Mã hóa đơn: ");
@@ -376,6 +340,7 @@ public class GUI_BanHang extends JFrame {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_2.setBounds(1275, 5, 250, 20);
-		contentPane.add(lblNewLabel_2);
+		add(lblNewLabel_2);
 	}
+
 }

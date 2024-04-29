@@ -14,7 +14,6 @@ import entity.KhachHang;
 
 //import connect.ConnectDB;
 
-import entity.KhachHang;
 
 
 public class KhachHangTheoSDT_DAO{

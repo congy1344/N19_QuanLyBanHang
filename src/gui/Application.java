@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,28 +9,45 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+public class Application implements ActionListener{
 
-public class Application {
-private JFrame frame;
+	private JFrame frame;
 	
 	public JFrame getFrame() {
 		return frame;
 	}
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-		Application ap = new Application();
-		new LoginDialog(ap.frame).setVisible(true);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Application window = new Application();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
+
+	/**
+	 * Create the application.
+	 */
 	public Application() {
-		initialize();		
+		initialize();
 	}
-	
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setSize(1200, 700);
+		frame.setSize(1800, 850);
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -45,14 +63,16 @@ private JFrame frame;
 				System.exit(0);
 			}
 		});
-		
 		mnFile.add(mntmExit);
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		JPanel panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		panel.add(tabbedPane, BorderLayout.CENTER);
+		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
 		tabbedPane.addTab("Bán xe", new GUI_BanHang());
-		frame.getContentPane().add(panel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
