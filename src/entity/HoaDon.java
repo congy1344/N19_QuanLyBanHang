@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class HoaDon {
 
-	private NhanVien nhanVien;
+	private String maNhanVien;
 	private String maHD;
 	private LocalDate ngayLapHoaDon;
 	private PTThanhToan ptThanhToan;
 	private double tienKhachDua;
 	
 	
-	public HoaDon(NhanVien nhanVien, String maHD, LocalDate ngayLapHoaDon, PTThanhToan ptThanhToan, double tienKhachDua) {
-		this.nhanVien = nhanVien;
+	public HoaDon(String maNhanVien, String maHD, LocalDate ngayLapHoaDon, PTThanhToan ptThanhToan, double tienKhachDua) {
+		this.maNhanVien = maNhanVien;
 		this.maHD = maHD;
 		this.ngayLapHoaDon = ngayLapHoaDon;
 		this.ptThanhToan = ptThanhToan;
@@ -21,13 +21,13 @@ public class HoaDon {
 	}
 
 	
-	public NhanVien getNhanVien() {
-		return nhanVien;
+	public String getMaNhanVien() {
+		return maNhanVien;
 	}
 
 
-	public void setNhanVien(NhanVien nhanVien) {
-		this.nhanVien = nhanVien;
+	public void setMaNhanVien(String maNhanVien) {
+		this.maNhanVien = maNhanVien;
 	}
 
 
@@ -41,7 +41,7 @@ public class HoaDon {
 	}
 
 
-	public LocalDate isNgayLapHoaDon() {
+	public LocalDate getNgayLapHoaDon() {
 		return ngayLapHoaDon;
 	}
 
@@ -84,7 +84,7 @@ public class HoaDon {
 
 	@Override
 	public String toString() {
-		return "HoaDon [nhanVien=" + nhanVien + ", maHD=" + maHD + ", ngayLapHoaDon=" + ngayLapHoaDon + ", ptThanhToan="
+		return "HoaDon [maNhanVien=" + maNhanVien + ", maHD=" + maHD + ", ngayLapHoaDon=" + ngayLapHoaDon + ", ptThanhToan="
 				+ ptThanhToan + ", tienKhachDua=" + tienKhachDua + ", getTongTien()=" + getTongTien()
 				+ ", getTienThua()=" + getTienThua() + "]";
 	}

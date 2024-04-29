@@ -20,10 +20,10 @@ import entity.KhachHang;
 public class KhachHangTheoSDT_DAO{
 	public ArrayList<KhachHang> getAllKhachHang() {
 		ArrayList<KhachHang> dskh = new ArrayList<KhachHang>();
-		//Connection con = ConnectDB.getInstance().getConnection();
+		Connection con = ConnectDB.getInstance().getConnection();
 		Statement stmt = null;
 		try {
-			//stmt = con.createStatement();
+			stmt = con.createStatement();
 			String sql = "SELECT * FROM KhachHang";
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
@@ -78,7 +78,7 @@ public class KhachHangTheoSDT_DAO{
 	}
 	
 
-	public boolean themSDT(KhachHang sdt) {
+	public boolean themKH(KhachHang kh) {
 		ConnectDB.getInstance();
 		Connection conn = ConnectDB.getInstance().getConnection();
 		PreparedStatement pstm = null;
@@ -86,9 +86,9 @@ public class KhachHangTheoSDT_DAO{
 		try {
 			String sql = "INSERT INTO KhachHang (maKH, tenKH, sdt) VALUES(?,?,?)";
 			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, sdt.getMaKH());
-			pstm.setString(2, sdt.getTenKH());
-			pstm.setString(3, sdt.getSdt());
+			pstm.setString(1, kh.getMaKH());
+			pstm.setString(2, kh.getTenKH());
+			pstm.setString(3, kh.getSdt());
 			n = pstm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception

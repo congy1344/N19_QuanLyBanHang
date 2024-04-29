@@ -73,7 +73,7 @@ public class SanPham_DAO {
 		ConnectDB.getInstance();
 		Connection conN = ConnectDB.getInstance().getConnection();
 		PreparedStatement pstm = null;
-		String sql = "INSERT INTO SANPHAM ( MaSP, TenSP, NgaySX, HSD, GiaNhap, GiaBan, Thue, LoaiHang, DonViTinh, SoLuongTonKho ) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO SanPham ( MaSP, TenSP, NgaySX, HSD, GiaNhap, GiaBan, Thue, LoaiHang, DonViTinh, SoLuongTonKho ) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			pstm = conN.prepareStatement(sql);
 			pstm.setString(1, sanPham.getMaSP());

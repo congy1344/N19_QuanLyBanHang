@@ -41,7 +41,4 @@ public class ChiTietHoaDon {
 		return "ChiTietHoaDon [sanPham=" + sanPham + ", soLuongSP=" + soLuongSP + ", getTienThue()=" + getTienThue()
 				+ ", getThanhTien()=" + getThanhTien() + "]";
 	}
-	
-	
-
 }
