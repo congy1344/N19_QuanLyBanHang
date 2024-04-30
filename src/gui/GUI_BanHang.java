@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -32,6 +34,7 @@ public class GUI_BanHang extends JPanel {
 	private JTextArea TextArea;
 	private DefaultTableModel tableModelKH;
 	private JTable tableKH;
+	LocalDate ngayHT = LocalDate.now();
 
 	/**
 	 * Create the panel.
@@ -330,6 +333,7 @@ public class GUI_BanHang extends JPanel {
 		panel_3.add(lb_tenKhachHang_1_2);
 		
 		JLabel lb_tenKhachHang_1_1_1 = new JLabel("DD/MM/YYYY");
+		lb_tenKhachHang_1_1_1.setText(ngayHT.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 		lb_tenKhachHang_1_1_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_tenKhachHang_1_1_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lb_tenKhachHang_1_1_1.setBounds(240, 40, 200, 20);

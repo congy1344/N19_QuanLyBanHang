@@ -68,6 +68,7 @@ public class Application implements ActionListener{
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		tabbedPane.addTab("Bán xe", new GUI_BanHang());
+		tabbedPane.addTab("Bán xe", new GUI_NhanVien());
 	}
 
 	@Override
