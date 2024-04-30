@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
 
+import connectDB.ConnectDB;
+
 public class Application implements ActionListener{
 
 	private JFrame frame;
@@ -39,6 +41,7 @@ public class Application implements ActionListener{
 	 * Create the application.
 	 */
 	public Application() {
+		ConnectDB.getInstance().connect();
 		initialize();
 	}
 
@@ -67,11 +70,10 @@ public class Application implements ActionListener{
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		tabbedPane.addTab("Bán xe", new GUI_BanHang());
-		tabbedPane.addTab("Bán xe", new GUI_NhanVien());
 		tabbedPane.addTab("Bán hàng", new GUI_BanHang());
+		tabbedPane.addTab("Nhân Viên", new GUI_NhanVien());
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

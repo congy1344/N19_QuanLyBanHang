@@ -18,6 +18,9 @@ public class SanPham_DAO {
 	public ArrayList<SanPham> getAllSanPham() {
 		ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
 		Connection conN = ConnectDB.getInstance().getConnection();
+//		if (conN == null) {
+//			System.out.println("null");
+//		}
 		Statement stm = null;
 		try {
 			stm = conN.createStatement();
