@@ -69,6 +69,7 @@ public class Application implements ActionListener{
 		
 		tabbedPane.addTab("Bán xe", new GUI_BanHang());
 		tabbedPane.addTab("Bán xe", new GUI_NhanVien());
+		tabbedPane.addTab("Bán hàng", new GUI_BanHang());
 	}
 
 	@Override
