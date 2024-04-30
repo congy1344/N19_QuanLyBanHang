@@ -67,7 +67,7 @@ public class Application implements ActionListener{
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		tabbedPane.addTab("Bán xe", new GUI_BanHang());
+		tabbedPane.addTab("Bán hàng", new GUI_BanHang());
 	}
 
 	@Override
