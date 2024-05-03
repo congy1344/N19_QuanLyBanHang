@@ -18,9 +18,6 @@ public class SanPham_DAO {
 	public ArrayList<SanPham> getAllSanPham() {
 		ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
 		Connection conN = ConnectDB.getInstance().getConnection();
-//		if (conN == null) {
-//			System.out.println("null");
-//		}
 		Statement stm = null;
 		try {
 			stm = conN.createStatement();
@@ -148,64 +145,47 @@ public class SanPham_DAO {
 			return false;
 		}
 	}
-	public SanPham getSanPhamTheoMa(String maSP) {
-		SanPham sp = null;
-		Connection con = ConnectDB.getInstance().getConnection();
-		Statement stmt = null;
-		try {
-			stmt = con.createStatement();
-			String sql = String.format("SELECT * FROM SanPham WHERE MaSP = '%s'", maSP);
-			ResultSet rs = stmt.executeQuery(sql);
-			while (rs.next()) {
-				String tenSP = rs.getString("TenSP");
-				LocalDate ngaySX = rs.getDate("NgaySX").toLocalDate();
-				LocalDate hSD = rs.getDate("HSD").toLocalDate();
-				float giaNhap = rs.getFloat("GiaNhap");
-				float giaBan = rs.getFloat("GiaBan");
-				float thue = rs.getFloat("Thue");
-				String loaiHang = rs.getString("LoaiHang");
-				LoaiHang lh = null;
-				if (loaiHang.equalsIgnoreCase(LoaiHang.THUC_PHAM.toString())) {
-					lh = LoaiHang.THUC_PHAM;
-				} else if (loaiHang.equalsIgnoreCase(LoaiHang.DO_DUNG.toString())) {
-					lh = LoaiHang.DO_DUNG;
-				} else if (loaiHang.equalsIgnoreCase(LoaiHang.VAN_PHONG_PHAM.toString())) {
-					lh = LoaiHang.VAN_PHONG_PHAM;
-				} else {
-					lh = LoaiHang.KHAC;
-				}
-				String donViTinh = rs.getString("DonViTinh");
-				DonViTinh dvt = null;
-				if (donViTinh.equalsIgnoreCase(DonViTinh.KG.toString())) {
-					dvt = DonViTinh.KG;
-				} else if (donViTinh.equalsIgnoreCase(DonViTinh.GOI.toString())) {
-					dvt = DonViTinh.GOI;
-				} else if (donViTinh.equalsIgnoreCase(DonViTinh.THUNG.toString())) {
-					dvt = DonViTinh.THUNG;
-				} else if (donViTinh.equalsIgnoreCase(DonViTinh.CHAI.toString())) {
-					dvt = DonViTinh.CHAI;
-				} else if (donViTinh.equalsIgnoreCase(DonViTinh.LOC.toString())) {
-					dvt = DonViTinh.LOC;
-				} else {
-					dvt = DonViTinh.KHAC;
-				}
-				int soLuongTonKho = rs.getInt("SoLuongTonKho");
-				sp = new SanPham(maSP, tenSP, ngaySX, hSD, giaNhap, giaBan, thue, lh, dvt, soLuongTonKho);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt.close();
-			} catch (SQLException e) {
-
-				e.printStackTrace();
-			}
-		}
-		return sp;
+	public static SanPham getSanPhamTheoMa(String maSP) {
+	    SanPham sp = null;
+	    Connection con = ConnectDB.getInstance().getConnection();
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+	    try {
+	        String sql = "SELECT * FROM SanPham WHERE MaSP = ?";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setString(1, maSP);
+	        rs = stmt.executeQuery();
+	        while (rs.next()) {
+	            String tenSP = rs.getString("TenSP");
+	            LocalDate ngaySX = rs.getDate("NgaySX").toLocalDate();
+	            LocalDate hSD = rs.getDate("HSD").toLocalDate();
+	            double giaNhap = rs.getDouble("GiaNhap");
+	            double giaBan = rs.getDouble("GiaBan");
+	            double thue = rs.getDouble("Thue");
+	            String loaiHang = rs.getString("LoaiHang");
+	            LoaiHang lh = LoaiHang.valueOf(loaiHang.toUpperCase());
+	            String donViTinh = rs.getString("DonViTinh");
+	            DonViTinh dvt = DonViTinh.valueOf(donViTinh.toUpperCase());
+	            int soLuongTonKho = rs.getInt("SoLuongTonKho");
+	            sp = new SanPham(maSP, tenSP, ngaySX, hSD, giaNhap, giaBan, thue, lh, dvt, soLuongTonKho);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (stmt != null) {
+	                stmt.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return sp;
 	}
+
 	public SanPham getSanPhamTheoTen(String tenSP) {
 		SanPham sp = null;
 		Connection con = ConnectDB.getInstance().getConnection();

@@ -15,7 +15,7 @@ import entity.HoaDon;
 import entity.PTThanhToan;
 
 public class HoaDon_DAO {
-	public ArrayList<HoaDon> getAllHoaDon() {
+	public static ArrayList<HoaDon> getAllHoaDon() {
 		ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
 		Connection conN = ConnectDB.getInstance().getConnection();
 		Statement stm = null;

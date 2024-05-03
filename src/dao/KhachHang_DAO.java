@@ -16,8 +16,8 @@ import entity.KhachHang;
 
 
 
-public class KhachHangTheoSDT_DAO{
-	public ArrayList<KhachHang> getAllKhachHang() {
+public class KhachHang_DAO{
+	public static ArrayList<KhachHang> getAllKhachHang() {
 		ArrayList<KhachHang> dskh = new ArrayList<KhachHang>();
 		Connection con = ConnectDB.getInstance().getConnection();
 		Statement stmt = null;

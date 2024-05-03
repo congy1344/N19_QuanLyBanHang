@@ -16,12 +16,40 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import connectDB.ConnectDB;
+import entity.DonViTinh;
+import entity.LoaiHang;
 import entity.NhanVien;
+import entity.SanPham;
 
 public class NhanVien_DAO {
+	
+	public ArrayList<NhanVien> getAllNhanVien() {
+		ArrayList<NhanVien> dsNV = new ArrayList<NhanVien>();
+		Connection conN = ConnectDB.getInstance().getConnection();
+		Statement stm = null;
+		try {
+			stm = conN.createStatement();
+			String sql = "select*from NhanVien";
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				String maNV = rs.getString("MaNV");
+				String tenNV = rs.getString("TenNV");
+				String diaChi = rs.getString("DiaChi");
+				String sdt = rs.getString("SDT");
+				NhanVien nv = new NhanVien(maNV, tenNV, diaChi, sdt);
+				dsNV.add(nv);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(dsNV);
+		return dsNV;
+	}
 	
 	public boolean themNhanVien(NhanVien nhanvien) {
 		ConnectDB.getInstance();
@@ -29,7 +57,7 @@ public class NhanVien_DAO {
 		PreparedStatement pstm = null;
 		int n = 0;
 		try {
-			String sql="INSERT INTO NhanVien ( MaNV, TenNV, DiaChi, SoDienThoai ) values(?,?,?,?)";
+			String sql="INSERT INTO NhanVien ( MaNV, TenNV, DiaChi, SDT ) values(?,?,?,?)";
 			pstm = conn.prepareStatement(sql);
 			pstm.setString(1, nhanvien.getMaNV());
 			pstm.setString(2, nhanvien.getTenNV());
@@ -50,13 +78,14 @@ public class NhanVien_DAO {
 	
 	 public NhanVien getNhanVienTheoMa(String ma) {
 		Connection con = ConnectDB.getInstance().getConnection();
-		Statement stmt = null;
+		PreparedStatement stmt = null;
 		NhanVien nv = null;
+		ResultSet rs = null;
 		try {
-			stmt = con.createStatement();
-			String sql = String
-					.format("SELECT * FROM NhanVien"+ "WHERE NhanVien.MaNV = '%s'", ma);
-			ResultSet rs = stmt.executeQuery(sql);
+			String sql = "SELECT * FROM NhanVien WHERE MaNV = ?";
+			stmt = con.prepareStatement(sql);
+	        stmt.setString(1, ma);
+	        rs = stmt.executeQuery();
 			while (rs.next()) {
 				String maNV = rs.getString("MaNV");
 				String tenNV = rs.getString("TenNV");

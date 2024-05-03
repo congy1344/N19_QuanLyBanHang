@@ -1,7 +1,12 @@
 package entity;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Objects;
+
+import dao.HoaDon_DAO;
 
 public class HoaDon {
 
@@ -11,10 +16,39 @@ public class HoaDon {
 	private PTThanhToan ptThanhToan;
 	private double tienKhachDua;
 	
-	
+	private String auto_IDHoaDon() {
+	    // Tạo định dạng cho số thứ tự
+	    DecimalFormat df = new DecimalFormat("00000");
+
+	    // Lấy danh sách hóa đơn của ngày hiện tại
+	    LocalDate ngayHienTai = LocalDate.now();
+	    ArrayList<HoaDon> hoaDonOfCurrentDate = null;
+		try {
+			hoaDonOfCurrentDate = HoaDon_DAO.getAllHoaDon();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	    // Kiểm tra xem ngày hiện tại đã tạo hóa đơn trước đó chưa
+	    boolean isNewDate = hoaDonOfCurrentDate.stream().anyMatch(hd -> hd.getNgayLapHoaDon().equals(ngayHienTai));
+
+	    // Nếu là ngày mới, reset số thứ tự về 1
+	    if (!isNewDate) {
+	        hoaDonOfCurrentDate.clear(); // Xóa danh sách hóa đơn cũ
+	    }
+
+	    int length = hoaDonOfCurrentDate.size() + 1; // Tăng số thứ tự lên 1
+
+	    String formattedDate = ngayHienTai.format(DateTimeFormatter.ofPattern("ddMMyy"));
+	    String finalId = "HD" + formattedDate + df.format(length);
+
+	    return finalId;
+	}
+
 	public HoaDon(String maNhanVien, String maHD, LocalDate ngayLapHoaDon, PTThanhToan ptThanhToan, double tienKhachDua) {
 		this.maNhanVien = maNhanVien;
-		this.maHD = maHD;
+		this.maHD = auto_IDHoaDon();
 		this.ngayLapHoaDon = ngayLapHoaDon;
 		this.ptThanhToan = ptThanhToan;
 		this.tienKhachDua = tienKhachDua;
@@ -37,7 +71,7 @@ public class HoaDon {
 
 
 	public void setMaHD(String maHD) {
-		this.maHD = maHD;
+		this.maHD = auto_IDHoaDon();
 	}
 
 
@@ -84,8 +118,8 @@ public class HoaDon {
 
 	@Override
 	public String toString() {
-		return "HoaDon [maNhanVien=" + maNhanVien + ", maHD=" + maHD + ", ngayLapHoaDon=" + ngayLapHoaDon + ", ptThanhToan="
-				+ ptThanhToan + ", tienKhachDua=" + tienKhachDua + ", getTongTien()=" + getTongTien()
+		return "HoaDon [maNhanVien=" + maNhanVien + ", maHD=" + maHD + ", ngayLapHoaDon=" + ngayLapHoaDon
+				+ ", ptThanhToan=" + ptThanhToan + ", tienKhachDua=" + tienKhachDua + ", getTongTien()=" + getTongTien()
 				+ ", getTienThua()=" + getTienThua() + "]";
 	}
 

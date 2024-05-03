@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -10,6 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import File.File;
+import dao.NhanVien_DAO;
+import entity.NhanVien;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -21,9 +27,17 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 	private JPasswordField txtPassword;
 	private JButton btnLogin, btnCancel;
 	private boolean loggedIn;
+	private NhanVien_DAO nv_Dao = new NhanVien_DAO();
+	private ArrayList<NhanVien> dsnv;
+	private String username;
+	private File f = new File();
 
 	public LoginDialog(JFrame parent) {
 		super(parent, "Đăng nhập", true);
+		gui();
+//		getDSNV();
+	}
+	public void gui() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 55, 200, 200, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 29, 40, 40, 30, 0 };
@@ -78,8 +92,6 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		gbc_btnCancel.gridy = 3;
 		getContentPane().add(btnCancel, gbc_btnCancel);
 
-		txtUsername.setText("admin");
-		txtPassword.setText("admin");
 
 		setSize(500, 200);
 		setLocationRelativeTo(null);
@@ -89,18 +101,27 @@ public class LoginDialog extends JDialog implements ActionListener, KeyListener 
 		txtUsername.addKeyListener(this);
 		txtPassword.addKeyListener(this);
 	}
-
+	
+	public NhanVien getTTNVDN() {
+		return nv_Dao.getNhanVienTheoMa(username);
+	}
 	public boolean isLoggedIn() {
 		return loggedIn;
+	}
+	
+	public void getDSNV() {
+		dsnv = nv_Dao.getAllNhanVien();
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLogin) {
-			String username = txtUsername.getText();
+			username = txtUsername.getText();
 			String password = String.valueOf(txtPassword.getPassword());
-
-			if (username.equals("admin") && password.equals("admin")) {
+			NhanVien nvdn = nv_Dao.getNhanVienTheoMa(username);
+			if (username.equals(nvdn.getMaNV()) && password.equals(nvdn.getMaNV())) {
+//			if (username.equals("admin") && password.equals("admin")) {
 //				Đăng nhập thành công và vào giao diện chính
+				f.GhiFile(username);
 				setVisible(false);
 				new Application().getFrame().setVisible(true);
 			} else {

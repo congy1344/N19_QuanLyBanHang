@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 
 import connectDB.ConnectDB;
 
@@ -28,8 +29,9 @@ public class Application implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Application window = new Application();
-					window.frame.setVisible(true);
+					new LoginDialog(window.frame).setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -71,7 +73,9 @@ public class Application implements ActionListener{
 		frame.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		tabbedPane.addTab("Bán hàng", new GUI_BanHang());
-		tabbedPane.addTab("Nhân Viên", new GUI_NhanVien());
+		tabbedPane.addTab("Nhân viên", new GUI_NhanVien());
+		tabbedPane.addTab("Bán hàng", new GUI_BanHang());
+		tabbedPane.addTab("Khách hàng", new GUI_KhachHang());
 	}
 	
 	@Override

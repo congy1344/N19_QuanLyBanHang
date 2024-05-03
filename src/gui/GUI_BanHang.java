@@ -25,7 +25,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import File.File;
+import dao.NhanVien_DAO;
 import dao.SanPham_DAO;
+import entity.NhanVien;
 import entity.SanPham;
 
 public class GUI_BanHang extends JPanel implements ActionListener{
@@ -41,6 +44,10 @@ public class GUI_BanHang extends JPanel implements ActionListener{
 	private SanPham_DAO sanPham_dao;
 	private JButton btn_ThemSanPham;
 	private JTextField txt_SP;
+	private File f = new File();
+	private NhanVien_DAO nhanVien_dao;
+	private JLabel lb_Ma;
+	private JLabel lb_NhanVien;
 
 	/**
 	 * Create the panel.
@@ -319,11 +326,12 @@ public class GUI_BanHang extends JPanel implements ActionListener{
 		lb_MaHD.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_3.add(lb_MaHD);
 		
-		JLabel lb_Ma = new JLabel("XXXX-XXXX-XXXX");
+		lb_Ma = new JLabel("XXXX-XXXX-XXXX");
 		lb_Ma.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_Ma.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lb_Ma.setBounds(240, 10, 200, 20);
 		panel_3.add(lb_Ma);
+		
 		
 		JLabel lb_NgayLapHD = new JLabel("Ngày lập hóa đơn:");
 		lb_NgayLapHD.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -337,19 +345,20 @@ public class GUI_BanHang extends JPanel implements ActionListener{
 		lb_Ngay.setBounds(240, 40, 200, 20);
 		panel_3.add(lb_Ngay);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nguyen Van A -XXXXXXXX");
-		lblNewLabel_2.setForeground(Color.BLUE);
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(1275, 5, 250, 20);
-		add(lblNewLabel_2);
+		lb_NhanVien = new JLabel("Nguyen Van A -XXXXXXXX");
+		lb_NhanVien.setForeground(Color.BLUE);
+		lb_NhanVien.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb_NhanVien.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lb_NhanVien.setBounds(1275, 5, 250, 20);
+		add(lb_NhanVien);
 		
 		btn_ThemSanPham.addActionListener(this);
 		btn_XuatHoaDon.addActionListener(this);
 		btn_LuuTam.addActionListener(this);
 		
 		sanPham_dao = new SanPham_DAO();
-		
+		nhanVien_dao = new NhanVien_DAO();
+		setNhanVienDangNhap();
 		loadLenModel();
 	}
 	//Phuong thuc nay test thoi
@@ -358,23 +367,24 @@ public class GUI_BanHang extends JPanel implements ActionListener{
 		sanPham_dao.getAllSanPham().forEach(sp-> {
 			String maSP = sp.getMaSP();
 			String tenSP = sp.getTenSP();
-			LocalDate ngaySX = sp.getNgaySX();
-			LocalDate hSD = sp.gethSD();
-			double giaNhap = sp.getGiaNhap();
 			double giaBan = sp.getGiaBan();
-			double thue = sp.getThue();
-			String loaiHang = sp.getLoaiHang().toString();
-			String donViTinh = sp.getDonViTinh().toString();
-			int soLuongTonKho = sp.getSoLuongTonKho();
+			float thue = (float) sp.getThue();
 			tableModelKH.addRow(new Object[] {tableModelKH.getRowCount(), maSP, tenSP, 5, giaBan, thue, 5, new JCheckBox()});
 		});
+	}
+	
+	public void setNhanVienDangNhap() {
+		String ma = f.DocTuFile();
+		NhanVien nv = nhanVien_dao.getNhanVienTheoMa(ma);
+		lb_NhanVien.setText(nv.getTenNV() +"-" + nv.getMaNV());
 	}
 	public void themVaoGioHang() {
 		String maSP = txt_SP.getText().toString();
 		SanPham sp = new SanPham_DAO().getSanPhamTheoMa(maSP);
 		int soluong = Integer.parseInt(txt_NhapSoLuong.getText());
-		double thanhTien = sp.getGiaBan() * soluong + (sp.getGiaBan() * soluong)*sp.getThue();
-		tableModelKH.addRow(new Object[] {tableModelKH.getRowCount(), maSP, sp.getTenSP(), soluong, sp.getGiaBan(), sp.getThue(), thanhTien, new JCheckBox()});
+		float thue = (float) sp.getThue();
+		float thanhTien = (float) (sp.getGiaBan() * soluong + (sp.getGiaBan() * soluong)*thue);
+		tableModelKH.addRow(new Object[] {tableModelKH.getRowCount(), maSP, sp.getTenSP(), soluong, sp.getGiaBan(), thue, thanhTien, new JCheckBox()});
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -383,5 +393,4 @@ public class GUI_BanHang extends JPanel implements ActionListener{
 			themVaoGioHang();
 		}
 	}
-
 }

@@ -16,23 +16,14 @@ public class ConnectDB {
 		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH";
 		String username = "sa";
 		String password = "Kkkkkkk@6";
+//		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH;integratedSecurity=true;";
 		try {
 			con = DriverManager.getConnection(url, username, password);
+//          con = DriverManager.getConnection(url);
 			System.out.println("OK");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		Đăng nhập sql bằng quyền window
-//		String url = "jdbc:sqlserver://localhost:1433;databasename=QLBH;integratedSecurity=true;";
-        try {
-            con = DriverManager.getConnection(url, username, password);
-//    		if (con != null) {
-//    			System.out.println("null");
-//    		}
-            System.out.println("OK");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 	}
 	
 	public void disconnect() {
@@ -45,6 +36,5 @@ public class ConnectDB {
 	}
 	public Connection getConnection() {
 		return con;
-		
 	}
 }
